@@ -23,3 +23,6 @@ A lightweight FiveM script that allows players to search trash for random reward
 # Support
 For issues and feature request, please use the GitHub pull requests and issues page. If you need support, you can contact me in Discord `_leevi2`
 
+# License
+This project is licensed under the GPL v3.0 License. You are free to use, modify, and distribute this script, but any derivative works must also be released under the same license.
+
