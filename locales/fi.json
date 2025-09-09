@@ -1,0 +1,20 @@
+{
+    "target": {
+        "label": "Tutki roskista"
+    },
+
+    "progress": {
+        "label": "Tutkitaan roskista"
+    },
+
+    "notify": {
+        "label": "Roskis",
+        "failed": "Epäonnistuit",
+        "canceled": "Toiminto peruutettu",
+        "nothingfound": "Et löytänyt mitään",
+        "cooldown": "Sinun täytyy odottaa hetki ennen kuin voit tutkia uudelleen",
+        "cannotcarry": "Et voi kantaa enempää esineitä",
+        "searched": "Tämä roskis on jo tutkittu",
+        "vehicle": "Et voi tutkia roskiksia ajoneuvoissa"
+    }
+}

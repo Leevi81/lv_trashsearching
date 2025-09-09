@@ -1,0 +1,20 @@
+{
+    "target": {
+        "label": "Search the trash bin"
+    },
+
+    "progress": {
+        "label": "Searching the trash bin"
+    },
+
+    "notify": {
+        "label": "Trash Searching",
+        "failed": "You failed the skill check",
+        "canceled": "Action cancelled",
+        "nothingfound": "You didn't find anything",
+        "cooldown": "You have to wait a while before you can search again",
+        "cannotcarry": "You cannot carry any more items",
+        "searched": "This bin has already been searched",
+        "vehicle": "You cannot search trash bins in vehicles"
+    }
+}
