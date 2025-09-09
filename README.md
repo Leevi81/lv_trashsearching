@@ -1,4 +1,4 @@
-# lv_trashsearching
+# LV Trash Searching
 A lightweight FiveM script that allows players to search trash for random rewards, with built-in cooldowns, skill checks, and anti-exploit measures.
 
 # Features
