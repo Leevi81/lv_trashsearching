@@ -11,15 +11,6 @@ utils.notify = function(message, type)
     })
 end
 
-utils.handleExploit = function(playerId, message)
-    DropPlayer(playerId, 'Attempted exploit abuse') 
-    utils.createLog(playerId, {
-        title = 'Attempted Exploit Abuse',
-        message = message,
-        color = 16711680
-    })
-end
-
 utils.createLog = function(source, data)
     if not serverConfig.logging.enabled then return end
 
@@ -98,6 +89,15 @@ utils.createLog = function(source, data)
 
         PerformHttpRequest(serverConfig.logging.webhookUrl, function(err, text, headers) end, 'POST', json.encode(payload), { ['Content-Type'] = 'application/json' })
     end
+end
+
+utils.handleExploit = function(playerId, message)
+    DropPlayer(playerId, 'Attempted exploit abuse') 
+    utils.createLog(playerId, {
+        title = 'Attempted Exploit Abuse',
+        message = message,
+        color = 16711680
+    })
 end
 
 return utils
