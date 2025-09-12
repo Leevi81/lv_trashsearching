@@ -5,7 +5,7 @@ A lightweight FiveM script that allows players to search trash for random reward
 - Interactive trash searching with ox_target
 - Player & bin cooldowns
 - Token-based anti-exploit system
-- Randomized rewards with inventory check
+- Randomized rewards
 - Fully configurable rewards, cooldowns, and progress bar settings
 - Search and reward logs through ox_lib or Discord
 
