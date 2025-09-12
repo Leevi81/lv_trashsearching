@@ -10,7 +10,7 @@ A lightweight FiveM script that allows players to search trash for random reward
 - Search and reward logs through ox_lib or Discord
 
 # Preview
-https://streamable.com/8onq12
+[Preview](https://streamable.com/8onq12)
 
 # Dependencies
 - [ox_lib](https://github.com/CommunityOx/ox_lib)
