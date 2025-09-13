@@ -43,6 +43,7 @@ utils.createLog = function(source, data)
         end
 
         local logMessage = ('%s\n\n**Player Identifiers:**\n' ..
+            'Server ID: %s\n' ..
             'Player: %s\n' ..
             'FiveM: %s\n' ..
             'Discord: %s\n' ..
@@ -52,7 +53,8 @@ utils.createLog = function(source, data)
             'Xbox: %s\n' ..
             'Live: %s\n' ..
             'IP: %s'):format(
-            data.message, 
+            data.message,
+            source, 
             playerName,
             playerIdentifiers.fivem or 'Unknown',
             playerIdentifiers.discord or 'Unknown',
