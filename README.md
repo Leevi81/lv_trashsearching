@@ -32,3 +32,8 @@ Contributions are welcome! If you want to report bugs, suggest features, or subm
 # License
 This project is licensed under the GPL v3.0 License. You are free to use, modify, and distribute this script, but any derivative works must also be released under the same license.
 
+# Credits
+- [Peak-Scripts]([https://github.c](https://github.com/Peak-Scripts) for the logging logic
+- [Qbox-project](https://github.com/Qbox-project/qbx_core) for the `isWearingGloves` logic
+
+
