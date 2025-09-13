@@ -1,7 +1,7 @@
 local clientConfig = require 'config.client'
 local utils = require 'client.utils'
 
-local function startSearching(entityId, entityCoords)
+local function startSearching(entity, entityId, entityCoords)
     if not entityId or not entityCoords then return end
 
     if cache.vehicle then
@@ -60,13 +60,21 @@ local function startSearching(entityId, entityCoords)
     end
 end
 
+lib.callback.register('lv_trashsesarching:client:getClosestObjCoords', function()
+    local pedCoords = GetEntityCoords(cache.ped)
+    local closestObj, closestObjCoords = lib.getClosestObject(pedCoords, 2.0)
+
+    return closestObj, closestObjCoords
+end)
+
 CreateThread(function()
     exports.ox_target:addModel(clientConfig.models, {
         label = locale('target.label'),
         icon = clientConfig.target.icon,
         distance = clientConfig.target.distance,
         onSelect = function(data)
-            local entityCoords = GetEntityCoords(data.entity)
+            local entity = data.entity
+            local entityCoords = GetEntityCoords(entity)
             local entityId = string.format("%d_%d_%d", math.floor(entityCoords.x), math.floor(entityCoords.y), math.floor(entityCoords.z))
             startSearching(entityId, entityCoords) 
         end
