@@ -9,9 +9,6 @@ A lightweight FiveM script that allows players to search trash for random reward
 - Fully configurable rewards, cooldowns, and progress bar settings
 - Search and reward logs through ox_lib or Discord
 
-# Preview
-[Preview](https://streamable.com/8onq12)
-
 # Dependencies
 - [ox_lib](https://github.com/CommunityOx/ox_lib)
 - [ox_inventory](https://github.com/CommunityOx/ox_inventory)
@@ -22,6 +19,9 @@ A lightweight FiveM script that allows players to search trash for random reward
 2. Place the `lv_trashsearching` folder in your server's resources directory
 4. Add `ensure lv_metaldetecting` to your server.cfg
 5. Configure the the script to your liking
+
+# Preview
+[Preview](https://streamable.com/8onq12)
 
 # Support
 If you need support, you can contact me in Discord `_leevi2`
