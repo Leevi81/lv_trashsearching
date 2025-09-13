@@ -15,6 +15,8 @@
         "cooldown": "You have to wait a while before you can search again",
         "cannotcarry": "You cannot carry any more items",
         "searched": "This bin has already been searched",
-        "vehicle": "You cannot search trash bins in vehicles"
+        "vehicle": "You cannot search trash bins in vehicles",
+        "gloves": "Ouch! Something sharp poked you. You should wear gloves next time!",
+        "alreadysearching": "You are already searching a trash bin"
     }
 }

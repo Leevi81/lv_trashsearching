@@ -15,6 +15,8 @@
         "cooldown": "Sinun täytyy odottaa hetki ennen kuin voit tutkia uudelleen",
         "cannotcarry": "Et voi kantaa enempää esineitä",
         "searched": "Tämä roskis on jo tutkittu",
-        "vehicle": "Et voi tutkia roskiksia ajoneuvoissa"
+        "vehicle": "Et voi tutkia roskiksia ajoneuvoissa",
+        "gloves": "Auts! Roskiksessa oli jotakin terävää. Muistahan käyttää hanskoja ensi kerralla!",
+        "alreadysearching": "Olet jo tutkimassa roskista"
     }
 }
