@@ -4,7 +4,7 @@ lua54 'yes'
 
 author 'Leevi81'
 description 'Trash searching resource for FiveM'
-version '1.0.0'
+version '1.0.1'
 
 client_scripts {
     'client/*.lua'
@@ -21,6 +21,5 @@ shared_scripts {
 }
 
 files {
-    'config/*.lua',
     'locales/*.json'
 }
