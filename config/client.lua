@@ -20,6 +20,14 @@ return {
         distance = 1.5
     },
 
+    sting = {
+        enable = true, -- Enable or disable sting chance when not using gloves
+        enableSoundEffect = true,
+        stingChance = 90, -- Percentage chance (0-100) of getting stung by something sharp if not wearing gloves
+        waitTime = 7000, 
+        healthLoss = 5, 
+    },
+
     models = {
         'prop_dumpster_01a',
         'prop_dumpster_02a',
@@ -45,3 +53,7 @@ return {
         'prop_recyclebin_01a'
     }
 }
+
+
+
+
