@@ -22,7 +22,7 @@ A lightweight FiveM script that allows players to search trash for random reward
 5. Configure the the script to your liking
 
 # Preview
-[Preview](https://streamable.com/8onq12)
+[Preview](https://streamable.com/eghu0q)
 
 # Support
 If you need support, you can contact me in Discord `_leevi2`
