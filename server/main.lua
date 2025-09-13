@@ -78,9 +78,21 @@ local function giveReward(source)
     })
 end
  
-RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, entityId, entityCoords)
+RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, entity, entityId, entityCoords)
     if not validateToken(source, token) then
         utils.handleExploit(source, 'Player attempted to exploit the trash searching system by sending an invalid token.')
+        return
+    end
+
+    local closestObj, closestObjCoords = lib.callback.await('lv_trashsesarching:client:getClosestObjCoords', source)
+
+    if not closestObjCoords then
+        utils.handleExploit(source, 'Player attempted to exploit the trash searching system without being near an object.')
+        return
+    end
+
+    if entity ~= closestObj then
+        utils.handleExploit(source, 'Player attempted to exploit the trash searching system by giving invalid entity.')
         return
     end
 
