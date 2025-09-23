@@ -8,7 +8,7 @@ A lightweight FiveM script that allows players to search trash for random reward
 - Randomized rewards
 - Fully configurable rewards, cooldowns, and progress bar settings
 - Search and reward logs through ox_lib or Discord
-- Chance of being stung without gloves
+- Chance of pricking your finger without gloves
 
 # Dependencies
 - [ox_lib](https://github.com/CommunityOx/ox_lib)
