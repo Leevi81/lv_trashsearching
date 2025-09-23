@@ -14,16 +14,16 @@ local function applyStingEffects()
     SetTimecycleModifier("spectator5")
 
     local currenthHealth = GetEntityHealth(cache.ped)
-    local newHealth = currenthHealth - clientConfig.sting.healthLoss
+    local newHealth = currenthHealth - clientConfig.prick.healthLoss
     SetEntityHealth(cache.ped, newHealth)
 
-    if clientConfig.sting.enableSoundEffect then
+    if clientConfig.prick.enableSoundEffect then
         PlaySoundFrontend(-1, "Frontend_Beast_Freeze_Screen", "FM_Events_Sasquatch_Sounds", 0)
     end
 
-    SetPedToRagdoll(ped, clientConfig.sting.waitTime, clientConfig.sting.waitTime, 0, true, true, false)
+    SetPedToRagdoll(ped, clientConfig.prick.waitTime, clientConfig.prick.waitTime, 0, true, true, false)
 
-    Wait(clientConfig.sting.waitTime)
+    Wait(clientConfig.prick.waitTime)
     resetStingEffects()
 end
 
@@ -31,13 +31,13 @@ local function shouldSting()
     local ped = PlayerPedId()
     local isWearingGloves = utils.isWearingGloves()
 
-    if not clientConfig.sting.enable then return false end
+    if not clientConfig.prick.enable then return false end
     if isWearingGloves then return false end
 
     if not isWearingGloves then
-        local stingChance = math.random(1, 100)
+        local prickChance = math.random(1, 100)
 
-        if stingChance <= clientConfig.sting.stingChance then
+        if prickChance <= clientConfig.prick.prickChance then
             utils.notify(locale('notify.gloves'), 'error')
             applyStingEffects()
             return true
