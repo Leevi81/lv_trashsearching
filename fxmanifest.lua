@@ -21,6 +21,6 @@ shared_scripts {
 }
 
 files {
-    'config/*.lua'
+    'config/*.lua',
     'locales/*.json'
 }
