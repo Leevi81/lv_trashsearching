@@ -1,12 +1,12 @@
 local clientConfig = require 'config.client'
 local utils = require 'client.utils'
 
-local function resetStingEffects()
+local function resetPrickEffects()
     ClearTimecycleModifier()
     SetPedMotionBlur(cache.ped, false)
 end
 
-local function applyStingEffects()
+local function applyPrickEffects()
     local ped = PlayerPedId()
 
     ClearPedTasksImmediately(cache.ped)
@@ -24,10 +24,10 @@ local function applyStingEffects()
     SetPedToRagdoll(ped, clientConfig.prick.waitTime, clientConfig.prick.waitTime, 0, true, true, false)
 
     Wait(clientConfig.prick.waitTime)
-    resetStingEffects()
+    resetPrickEffects()
 end
 
-local function shouldSting()
+local function shouldPrick()
     local ped = PlayerPedId()
     local isWearingGloves = utils.isWearingGloves()
 
@@ -39,7 +39,7 @@ local function shouldSting()
 
         if prickChance <= clientConfig.prick.prickChance then
             utils.notify(locale('notify.gloves'), 'error')
-            applyStingEffects()
+            applyPrickEffects()
             return true
         end
     end
@@ -95,7 +95,7 @@ local function startSearching(entity, entityId, entityCoords)
     })
 
     if progressSuccess then
-        if shouldSting() then return end
+        if shouldPrick() then return end
         
         local token = lib.callback.await('lv_trashsearching:server:generateToken', false)
         if not token then return end
@@ -126,3 +126,4 @@ CreateThread(function()
         end
     })
 end)
+
