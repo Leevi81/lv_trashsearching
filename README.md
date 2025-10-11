@@ -21,8 +21,9 @@ A lightweight FiveM script that allows players to search trash for random reward
 4. Add `ensure lv_metaldetecting` to your server.cfg
 5. Configure the the script to your liking
 
-# Preview
+# Links
 [Preview](https://streamable.com/eghu0q)
+[Cfx.re Post](https://forum.cfx.re/t/free-lv-trash-searching/5356617/2)
 
 # Support
 If you need support, you can contact me in Discord `_leevi2`
