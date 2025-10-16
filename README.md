@@ -27,7 +27,7 @@ A lightweight FiveM script that allows players to search trash for random reward
 - [Discord](https://dsc.gg/lvscripts)
 
 # Support
-If you need support, you can contact me in Discord `_leevi2`
+If you need support, you can join our [Discord Server](https://dsc.gg/lvscripts)
 
 # Contributing
 Contributions are welcome! If you want to report bugs, suggest features, or submit improvements, please open an issue or a pull request.
