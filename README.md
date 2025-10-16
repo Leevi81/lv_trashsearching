@@ -24,6 +24,7 @@ A lightweight FiveM script that allows players to search trash for random reward
 # Links
 - [Preview](https://streamable.com/eghu0q)
 - [Cfx.re Post](https://forum.cfx.re/t/free-lv-trash-searching/5356617/2)
+- [Discord](https://dsc.gg/lvscripts)
 
 # Support
 If you need support, you can contact me in Discord `_leevi2`
