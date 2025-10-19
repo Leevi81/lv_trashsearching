@@ -84,7 +84,7 @@ RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, enti
         return
     end
 
-    local closestObj, closestObjCoords = lib.callback.await('lv_trashsesarching:client:getClosestObjCoords', source)
+    local closestObj, closestObjCoords = lib.callback.await('lv_trashsearching:client:getClosestObjCoords', source)
 
     if not closestObjCoords then
         utils.handleExploit(source, 'Player attempted to exploit the trash searching system without being near an object.')
@@ -150,4 +150,5 @@ end)
 
 if serverConfig.enableVersionCheck then
     lib.versionCheck('Leevi81/lv_trashsearching')
+
 end
