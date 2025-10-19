@@ -54,6 +54,4 @@ return {
     }
 }
 
-
-
-
+closestObjDistance = 3.0
