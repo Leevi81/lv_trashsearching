@@ -108,7 +108,7 @@ end
 
 lib.callback.register('lv_trashsearching:client:getClosestObjCoords', function()
     local pedCoords = GetEntityCoords(cache.ped)
-    local closestObj, closestObjCoords = lib.getClosestObject(pedCoords, 2.0)
+    local closestObj, closestObjCoords = lib.getClosestObject(pedCoords, clientConfig.closestObjDistance)
 
     return closestObj, closestObjCoords
 end)
@@ -126,5 +126,6 @@ CreateThread(function()
         end
     })
 end)
+
 
 
