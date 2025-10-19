@@ -9,7 +9,7 @@ A lightweight FiveM script that allows players to search trash for random reward
 - Fully configurable rewards, cooldowns, and progress bar settings
 - Search and reward logs through ox_lib or Discord
 - Chance of pricking your finger without gloves
-
+  
 # Dependencies
 - [ox_lib](https://github.com/CommunityOx/ox_lib)
 - [ox_inventory](https://github.com/CommunityOx/ox_inventory)
@@ -20,7 +20,16 @@ A lightweight FiveM script that allows players to search trash for random reward
 2. Place the `lv_trashsearching` folder in your server's resources directory
 4. Add `ensure lv_metaldetecting` to your server.cfg
 5. Configure the the script to your liking
-
+6. (Optional) To disable ox_inventory’s default trash searching, delete the following lines in `ox_inventory/modules/inventory/client.lua`
+   
+```   
+exports.ox_target:addModel(Inventory.Dumpsters, {
+    icon = 'fas fa-dumpster',
+    label = locale('search_dumpster'),
+    onSelect = function(data) return Inventory.OpenDumpster(data.entity) end,
+    distance = 2
+})
+```
 # Links
 - [Preview](https://streamable.com/eghu0q)
 - [Cfx.re Post](https://forum.cfx.re/t/free-lv-trash-searching/5356617/2)
