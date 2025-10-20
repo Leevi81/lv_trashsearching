@@ -45,22 +45,20 @@ local function shouldPrick()
     end
 end
 
-local function startSearching(entity, entityId, entityCoords)
-    if not entityId or not entityCoords then return end
-
+local function startSearching(entityId)
     if cache.vehicle then
         utils.notify(locale('notify.vehicle'), 'error')
         return
     end
 
-    local hasBinCooldown = lib.callback.await('lv_trashsearching:server:hasBinCooldown', false, entityId)
-    if hasBinCooldown then
+    local cooldowns = lib.callback.await('lv_trashsearching:server:checkCooldowns', false, entityId)
+
+    if cooldowns.bin then
         utils.notify(locale('notify.searched'), 'error')
         return
     end
 
-    local hasPlayerCooldown = lib.callback.await('lv_trashsearching:server:hasPlayerCooldown', false)
-    if hasPlayerCooldown then
+    if cooldowns.player then
         utils.notify(locale('notify.cooldown'), 'error')
         return
     end
@@ -96,22 +94,15 @@ local function startSearching(entity, entityId, entityCoords)
 
     if progressSuccess then
         if shouldPrick() then return end
-        
+
         local token = lib.callback.await('lv_trashsearching:server:generateToken', false)
         if not token then return end
 
-        TriggerServerEvent('lv_trashsearching:server:startSearching', token, entity, entityId, entityCoords)
+        TriggerServerEvent('lv_trashsearching:server:startSearching', token, entityId)
     else
         utils.notify(locale('notify.canceled'), 'error')
     end
 end
-
-lib.callback.register('lv_trashsearching:client:getClosestObjCoords', function()
-    local pedCoords = GetEntityCoords(cache.ped)
-    local closestObj, closestObjCoords = lib.getClosestObject(pedCoords, clientConfig.closestObjDistance)
-
-    return closestObj, closestObjCoords
-end)
 
 CreateThread(function()
     exports.ox_target:addModel(clientConfig.models, {
@@ -121,11 +112,9 @@ CreateThread(function()
         onSelect = function(data)
             local entity = data.entity
             local entityCoords = GetEntityCoords(entity)
-            local entityId = string.format("%d_%d_%d", math.floor(entityCoords.x), math.floor(entityCoords.y), math.floor(entityCoords.z))
-            startSearching(entity, entityId, entityCoords) 
+            local entityId = string.format("%d_%d_%d", math.floor(entityCoords.x), math.floor(entityCoords.y),
+                math.floor(entityCoords.z))
+            startSearching(entityId)
         end
     })
 end)
-
-
-
