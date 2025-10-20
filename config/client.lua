@@ -27,6 +27,8 @@ return {
         waitTime = 7000, -- How long should the effect last
         healthLoss = 5, 
     },
+    
+    closestObjDistance = 3.0, -- Maximum distance the closest bin will be searched
 
     models = {
         'prop_dumpster_01a',
@@ -51,8 +53,5 @@ return {
         'prop_gas_smallbin01',
         'prop_recyclebin_03_a',
         'prop_recyclebin_01a'
-    }
-},
-
-closestObjDistance = 3.0 -- Maximum distance the closest bin will be searched
-
+    },
+}
