@@ -63,7 +63,7 @@ local function giveReward(source)
     end
 
     if #foundItems == 0 then
-        utils.notify(source, locale('notify.nothingfound'), 'error')
+        utils.notify(locale('notify.nothingfound'), 'error')
         utils.createLog(source, {
             title = 'Nothing Found',
             message = 'Player searched the trash but found nothing (no items passed chance check).',
@@ -79,9 +79,26 @@ local function giveReward(source)
     })
 end
 
-RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, entityId)
+RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, entity, entityCoords)
     if not validateToken(source, token) then
         utils.handleExploit(source, 'Player attempted to exploit the trash searching system by sending an invalid token.')
+        return
+    end
+
+    local pedCoords = GetEntityCoords(GetPlayerPed(source))
+    local nearbyObjects = lib.callback.await('lv_trashsearching:client:getNearbyObjects', source)
+
+    local valid = false
+    for _, object in ipairs(nearbyObjects) do
+        if object.object == entity and #(pedCoords - object.coords) <= 3.0 and #(entityCoords - object.coords) <= 3.0 and #(pedCoords - entityCoords) <= 3.0 then
+            valid = true
+            break
+        end
+    end
+
+    if not valid then
+        utils.handleExploit(source,
+            'Player attempted to exploit the trash searching system by sending an invalid entity.')
         return
     end
 
@@ -97,14 +114,14 @@ RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, enti
     end
 
     if serverConfig.bincooldown.enabled then
-        setCooldown(entityId, serverConfig.bincooldown.time)
+        setCooldown(entity, serverConfig.bincooldown.time)
     end
 end)
 
-lib.callback.register('lv_trashsearching:server:checkCooldowns', function(source, entityId)
+lib.callback.register('lv_trashsearching:server:checkCooldowns', function(source, entity)
     return {
         player = hasCooldown(source),
-        bin = hasCooldown(entityId)
+        bin = hasCooldown(entity)
     }
 end)
 
