@@ -45,13 +45,13 @@ local function shouldPrick()
     end
 end
 
-local function startSearching(entityId)
+local function startSearching(entity, entityCoords)
     if cache.vehicle then
         utils.notify(locale('notify.vehicle'), 'error')
         return
     end
 
-    local cooldowns = lib.callback.await('lv_trashsearching:server:checkCooldowns', false, entityId)
+    local cooldowns = lib.callback.await('lv_trashsearching:server:checkCooldowns', false, entity)
 
     if cooldowns.bin then
         utils.notify(locale('notify.searched'), 'error')
@@ -98,11 +98,18 @@ local function startSearching(entityId)
         local token = lib.callback.await('lv_trashsearching:server:generateToken', false)
         if not token then return end
 
-        TriggerServerEvent('lv_trashsearching:server:startSearching', token, entityId)
+        TriggerServerEvent('lv_trashsearching:server:startSearching', token, entity, entityCoords)
     else
         utils.notify(locale('notify.canceled'), 'error')
     end
 end
+
+lib.callback.register('lv_trashsearching:client:getNearbyObjects', function()
+    local pedCoords = GetEntityCoords(cache.ped)
+    local nearbyObjects = lib.getNearbyObjects(pedCoords, 3.0)
+
+    return nearbyObjects
+end)
 
 CreateThread(function()
     exports.ox_target:addModel(clientConfig.models, {
@@ -112,9 +119,7 @@ CreateThread(function()
         onSelect = function(data)
             local entity = data.entity
             local entityCoords = GetEntityCoords(entity)
-            local entityId = string.format("%d_%d_%d", math.floor(entityCoords.x), math.floor(entityCoords.y),
-                math.floor(entityCoords.z))
-            startSearching(entityId)
+            startSearching(entity, entityCoords)
         end
     })
 end)
