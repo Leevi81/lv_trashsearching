@@ -31,8 +31,6 @@ return {
         image = '' -- Image of the webhook (if using discord)
     },
 
-    maxDistance = 3.0, -- Maximum allowed distance from the trash bin
-
     enableVersionCheck = true
 
 }
