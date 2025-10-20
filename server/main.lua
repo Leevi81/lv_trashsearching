@@ -32,7 +32,7 @@ end
 local function giveReward(source)
     local chance = math.random(1, 100)
 
-    if chance >= serverConfig.rewards.chance then 
+    if chance > serverConfig.rewards.chance then
         utils.notify(locale('notify.nothingfound'), 'error')
 
         utils.createLog(source, {
@@ -43,78 +43,50 @@ local function giveReward(source)
         return
     end
 
-    local differentItems = 0
     local rewardAmount = math.random(serverConfig.rewards.amount.min, serverConfig.rewards.amount.max)
     local foundItems = {}
 
-    for i=1, #serverConfig.rewards.items do
-        if differentItems >= rewardAmount then break end
-
+    for i = 1, rewardAmount do
         local item = serverConfig.rewards.items[math.random(#serverConfig.rewards.items)]
+        local itemChance = math.random(1, 100)
         local itemAmount = math.random(item.amount.min, item.amount.max)
-        if chance <= item.chance then
+
+        if itemChance <= item.chance then
             if not exports.ox_inventory:CanCarryItem(source, item.name, itemAmount) then
                 utils.notify(locale('notify.cannotcarry'), 'error')
                 return
             end
 
             exports.ox_inventory:AddItem(source, item.name, itemAmount)
-            differentItems = differentItems + 1
-
-            foundItems[#foundItems + 1] = { name = item.name, amount = itemAmount }
+            foundItems[#foundItems + 1] = ('- %sx %s'):format(itemAmount, item.name)
         end
     end
 
-    local itemList = {}
-
-    for _, item in ipairs(foundItems) do
-        itemList[#itemList + 1] = ('- %sx %s'):format(item.amount, item.name)
+    if #foundItems == 0 then
+        utils.notify(source, locale('notify.nothingfound'), 'error')
+        utils.createLog(source, {
+            title = 'Nothing Found',
+            message = 'Player searched the trash but found nothing (no items passed chance check).',
+            color = 16776960
+        })
+        return
     end
 
     utils.createLog(source, {
         title = 'Items Found',
-        message = ('Player searched the trash and found:\n%s'):format(table.concat(itemList, '\n')),
+        message = ('Player searched the trash and found:\n%s'):format(table.concat(foundItems, '\n')),
         color = 65280
     })
 end
- 
-RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, entity, entityId, entityCoords)
+
+RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, entityId)
     if not validateToken(source, token) then
         utils.handleExploit(source, 'Player attempted to exploit the trash searching system by sending an invalid token.')
         return
     end
 
-    local closestObj, closestObjCoords = lib.callback.await('lv_trashsearching:client:getClosestObjCoords', source)
-
-    if not closestObjCoords then
-        utils.handleExploit(source, 'Player attempted to exploit the trash searching system without being near an object.')
-        return
-    end
-
-    if entity ~= closestObj then
-        utils.handleExploit(source, 'Player attempted to exploit the trash searching system by giving invalid entity.')
-        return
-    end
-
-    if not entityId then
-        utils.handleExploit(source, 'Player attempted to exploit the trash searching system by sending an invalid entityId.')
-        return 
-    end
-
     if serverConfig.playercooldown.enabled and hasCooldown(source) then
         utils.notify(locale('notify.cooldown'), 'error')
-        return
-    end
-
-    if not entityCoords then
-        utils.handleExploit(source, 'Player attempted to exploit the trash searching system by sending invalid coords.')
-        return 
-    end
-
-    local pedCoords = GetEntityCoords(GetPlayerPed(source))
-    local dist = #(entityCoords - pedCoords)
-    if dist > serverConfig.maxDistance then
-        utils.handleExploit(source, 'Player attempted to exploit trash searching without being near an object.')
         return
     end
 
@@ -129,12 +101,11 @@ RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, enti
     end
 end)
 
-lib.callback.register('lv_trashsearching:server:hasPlayerCooldown', function(source)
-    return hasCooldown(source)
-end)
-
-lib.callback.register('lv_trashsearching:server:hasBinCooldown', function(source, entityId)
-    return hasCooldown(entityId)
+lib.callback.register('lv_trashsearching:server:checkCooldowns', function(source, entityId)
+    return {
+        player = hasCooldown(source),
+        bin = hasCooldown(entityId)
+    }
 end)
 
 lib.callback.register('lv_trashsearching:server:generateToken', function(source)
@@ -150,5 +121,4 @@ end)
 
 if serverConfig.enableVersionCheck then
     lib.versionCheck('Leevi81/lv_trashsearching')
-
 end
