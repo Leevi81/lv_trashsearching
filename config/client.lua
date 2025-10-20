@@ -24,7 +24,7 @@ return {
         enable = true, -- Enable or disable prick chance when not using gloves
         enableSoundEffect = true,
         prickChance = 90, -- Percentage chance (0-100) of getting stung by something sharp if not wearing gloves
-        waitTime = 7000, 
+        waitTime = 7000, -- How long should the effect last
         healthLoss = 5, 
     },
 
@@ -52,6 +52,7 @@ return {
         'prop_recyclebin_03_a',
         'prop_recyclebin_01a'
     }
-}
+},
 
-closestObjDistance = 3.0
+closestObjDistance = 3.0 -- Maximum distance the closest bin will be searched
+
