@@ -27,8 +27,6 @@ return {
         waitTime = 7000, -- How long should the effect last
         healthLoss = 5, 
     },
-    
-    closestObjDistance = 3.0, -- Maximum distance the closest bin will be searched
 
     models = {
         'prop_dumpster_01a',
