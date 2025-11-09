@@ -51,14 +51,24 @@ local function giveReward(source)
         local itemChance = math.random(1, 100)
         local itemAmount = math.random(item.amount.min, item.amount.max)
 
-        if itemChance <= item.chance then
-            if not exports.ox_inventory:CanCarryItem(source, item.name, itemAmount) then
-                utils.notify(locale('notify.cannotcarry'), 'error')
-                return
-            end
+        local alreadyFound = false
+        for _, foundItem in ipairs(foundItems) do
+          if foundItem == item.name then
+            alreadyFound = true
+            break
+          end
+        end
 
-            exports.ox_inventory:AddItem(source, item.name, itemAmount)
-            foundItems[#foundItems + 1] = ('- %sx %s'):format(itemAmount, item.name)
+        if not alreadyFound then
+            if itemChance <= item.chance then
+                if not exports.ox_inventory:CanCarryItem(source, item.name, itemAmount) then
+                    utils.notify(locale('notify.cannotcarry'), 'error')
+                    return
+                end
+    
+                exports.ox_inventory:AddItem(source, item.name, itemAmount)
+                foundItems[#foundItems + 1] = ('- %sx %s'):format(itemAmount, item.name)
+            end
         end
     end
 
@@ -139,3 +149,4 @@ end)
 if serverConfig.enableVersionCheck then
     lib.versionCheck('Leevi81/lv_trashsearching')
 end
+
