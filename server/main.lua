@@ -21,6 +21,12 @@ local function hasCooldown(id)
     return true
 end
 
+local function generateEntityId(coords)
+    local entityId = string.format("%d_%d_%d", math.floor(coords.x), math.floor(coords.y), math.floor(coords.z))
+
+    return entityId
+end
+
 local function validateToken(source, token)
     if tokens[source] and tokens[source] == token then
         tokens[source] = nil
@@ -130,14 +136,17 @@ RegisterNetEvent('lv_trashsearching:server:startSearching', function(token, enti
     end
 
     if serverConfig.bincooldown.enabled then
-        setCooldown(entity, serverConfig.bincooldown.time)
+        local entityId = generateEntityId(entityCoords)   
+        setCooldown(entityId, serverConfig.bincooldown.time)
     end
 end)
 
-lib.callback.register('lv_trashsearching:server:checkCooldowns', function(source, entity)
+lib.callback.register('lv_trashsearching:server:checkCooldowns', function(source, entityCoords)
+    local entityId = generateEntityId(entityCoords)
+        
     return {
         player = hasCooldown(source),
-        bin = hasCooldown(entity)
+        bin = hasCooldown(entityId)
     }
 end)
 
@@ -155,5 +164,6 @@ end)
 if serverConfig.enableVersionCheck then
     lib.versionCheck('Leevi81/lv_trashsearching')
 end
+
 
 
