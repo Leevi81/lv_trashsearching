@@ -53,7 +53,7 @@ local function giveReward(source)
 
         local alreadyFound = false
         for _, foundItem in ipairs(foundItems) do
-          if foundItem == item.name then
+          if foundItem.name == item.name then
             alreadyFound = true
             break
           end
@@ -67,7 +67,8 @@ local function giveReward(source)
                 end
     
                 exports.ox_inventory:AddItem(source, item.name, itemAmount)
-                foundItems[#foundItems + 1] = ('- %sx %s'):format(itemAmount, item.name)
+                
+                foundItems[#foundItems + 1] = { name = item.name, amount = itemAmount }
             end
         end
     end
@@ -82,9 +83,14 @@ local function giveReward(source)
         return
     end
 
+    local logLines = {}
+    for _, item in ipairs(foundItems) do
+        logLines[#logLines + 1] = ('- %sx %s'):format(item.amount, item.name)
+    end
+
     utils.createLog(source, {
         title = 'Items Found',
-        message = ('Player searched the trash and found:\n%s'):format(table.concat(foundItems, '\n')),
+        message = ('Player searched the trash and found:\n%s'):format(table.concat(logLines, '\n')),
         color = 65280
     })
 end
@@ -149,4 +155,5 @@ end)
 if serverConfig.enableVersionCheck then
     lib.versionCheck('Leevi81/lv_trashsearching')
 end
+
 
