@@ -51,7 +51,7 @@ local function startSearching(entity, entityCoords)
         return
     end
 
-    local cooldowns = lib.callback.await('lv_trashsearching:server:checkCooldowns', false, entity)
+    local cooldowns = lib.callback.await('lv_trashsearching:server:checkCooldowns', false, entityCoords)
 
     if cooldowns.bin then
         utils.notify(locale('notify.searched'), 'error')
@@ -123,3 +123,4 @@ CreateThread(function()
         end
     })
 end)
+
