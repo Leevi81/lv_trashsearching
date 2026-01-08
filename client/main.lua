@@ -100,6 +100,7 @@ local function startSearching(entity, entityCoords)
 
         TriggerServerEvent('lv_trashsearching:server:startSearching', token, entity, entityCoords)
     else
+        ClearPedTasksImmediately(cache.ped)
         utils.notify(locale('notify.canceled'), 'error')
     end
 end
@@ -123,4 +124,3 @@ CreateThread(function()
         end
     })
 end)
-
